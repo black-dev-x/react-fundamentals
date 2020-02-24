@@ -1,9 +1,15 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import AuthorQuiz from './AuthorQuiz';
 
-test('renders learn react link', () => {
+test('renders author quiz', () => {
   const { getByText } = render(<AuthorQuiz />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const title = getByText(/Author Quiz/i);
+  expect(title).toBeInTheDocument();
 });
+
+test('renders without crashing' , () => {
+  const div = document.createElement('div')
+  ReactDOM.render(<AuthorQuiz></AuthorQuiz>, div)
+})
