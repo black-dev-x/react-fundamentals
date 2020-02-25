@@ -6,6 +6,12 @@ import './AuthorQuiz.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Footer from './components/Footer';
 
+const authors = [{
+  name: 'Mark Twain',
+  imageUrl: 'images/authors/marktwain.jpg',
+  imageSource: 'Wikimedia Commons',
+  books: ['The Adventures of Huckleberry Finn']
+}]
 
 function AuthorQuiz() {
   return (
