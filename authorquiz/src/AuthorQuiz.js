@@ -5,6 +5,7 @@ import Hero from './components/Hero'
 import './AuthorQuiz.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Footer from './components/Footer'
+import { shuffle, sample } from 'underscore'
 
 const authors = [
   {
@@ -47,9 +48,17 @@ const authors = [
   }
 ]
 
-export default () => {
+const getTurnData = () => {
+  const allBooks = authors.reduce((books, author) => books.concat(author.books), [])
+  const fourRandomBooks = shuffle(allBooks).slice(0, 4)
+  const answer = sample(fourRandomBooks)
+  const author = authors.find(author => author.books.some(book => book === answer))
+  return { author, books: fourRandomBooks }
+}
 
-  const [turnData] = useState({ author: authors[0], books: authors[0].books })
+
+export default () => {
+  const [turnData, setTurnData] = useState(getTurnData())
 
   return (
     <div className="container-fluid">
