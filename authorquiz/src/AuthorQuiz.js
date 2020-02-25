@@ -58,7 +58,7 @@ const getTurnData = () => {
 
 
 export default () => {
-  const [turnData, setTurnData] = useState(getTurnData())
+  const [turnData] = useState(getTurnData())
 
   return (
     <div className="container-fluid">
