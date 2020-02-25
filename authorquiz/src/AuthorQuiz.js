@@ -4,6 +4,7 @@ import Turn from './components/Turn';
 import Hero from './components/Hero';
 import './AuthorQuiz.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Footer from './components/Footer';
 
 
 function AuthorQuiz() {
@@ -12,6 +13,7 @@ function AuthorQuiz() {
       <Hero></Hero>
       <Turn></Turn>
       <Continue></Continue>
+      <Footer></Footer>
     </div>
   );
 }
