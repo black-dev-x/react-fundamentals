@@ -1,0 +1,12 @@
+.turn > div {
+    height: 400px;
+}
+
+.turn {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.author-image {
+    max-height: 100%;
+}

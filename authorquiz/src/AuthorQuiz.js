@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Continue from './components/Continue';
 import Turn from './components/Turn';
 import Hero from './components/Hero';
@@ -8,20 +8,25 @@ import Footer from './components/Footer';
 
 const authors = [{
   name: 'Mark Twain',
-  imageUrl: 'images/authors/marktwain.jpg',
+  imageUrl: '/images/authors/marktwain.jpg',
   imageSource: 'Wikimedia Commons',
-  books: ['The Adventures of Huckleberry Finn']
+  books: [
+    'The Adventures of Huckleberry Finn',
+    'Life on the Mississippi',
+    'Roughing It'
+  ]
 }]
 
-function AuthorQuiz() {
+export default () => {
+
+  const [turnData] = useState({ author: authors[0], books: authors[0].books })
+
   return (
     <div className="container-fluid">
       <Hero></Hero>
-      <Turn></Turn>
+      <Turn {...turnData}></Turn>
       <Continue></Continue>
       <Footer></Footer>
     </div>
-  );
+  )
 }
-
-export default AuthorQuiz;
