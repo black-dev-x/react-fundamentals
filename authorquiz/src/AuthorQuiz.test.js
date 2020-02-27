@@ -33,3 +33,10 @@ test('Expect the click function to be called', () => {
   turn.find('.answer').first().simulate('click')
   expect(fakeFunction).toHaveBeenCalled()
 })
+
+test('Expect the click function to be called', () => {
+  const fakeFunction = jest.fn()
+  const turn = mount(<Turn author="" books={['yet another book']} status="right" selectBook={fakeFunction}></Turn>)
+  turn.find('.answer').first().simulate('click')
+  expect(fakeFunction).toHaveBeenCalledWith('yet another book')
+})
