@@ -53,17 +53,21 @@ const getTurnData = () => {
   const fourRandomBooks = shuffle(allBooks).slice(0, 4)
   const answer = sample(fourRandomBooks)
   const author = authors.find(author => author.books.some(book => book === answer))
-  return { author, books: fourRandomBooks }
+  const status = 'none'
+  return { author, books: fourRandomBooks, status }
 }
 
 
 export default () => {
-  const [turnData] = useState(getTurnData())
-
+  const [turnData, setTurnData] = useState(getTurnData())
+  const selectBook = (bookTitle) => {
+    const choiceIsRight = turnData.author.books.includes(bookTitle)
+    setTurnData({ ...turnData, status: choiceIsRight ? 'right' : 'wrong' })
+  }
   return (
     <div className="container-fluid">
       <Hero></Hero>
-      <Turn {...turnData}></Turn>
+      <Turn {...turnData} selectBook={selectBook}></Turn>
       <Continue></Continue>
       <Footer></Footer>
     </div>

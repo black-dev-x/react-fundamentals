@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 import './Book.css'
 
-export default props => {
+export default ({ title, click }) => {
     return (
-        <div className="answer">
-            <h4>{props.title}</h4>
+        <div className="answer" onClick={() => click(title)}>
+            <h4>{title}</h4>
         </div>
     )
 }
