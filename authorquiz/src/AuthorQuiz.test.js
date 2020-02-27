@@ -26,3 +26,10 @@ test('When the right answer has been selected background is green', () => {
   const turn = mount(<Turn author="" books={[]} status="right"></Turn>)
   expect(turn.find("div.row.turn").props().style.backgroundColor).toBe('green')
 })
+
+test('Expect the click function to be called', () => {
+  const fakeFunction = jest.fn()
+  const turn = mount(<Turn author="" books={['one book']} status="right" selectBook={fakeFunction}></Turn>)
+  turn.find('.answer').first().simulate('click')
+  expect(fakeFunction).toHaveBeenCalled()
+})
