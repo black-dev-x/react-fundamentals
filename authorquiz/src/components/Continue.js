@@ -1,4 +1,5 @@
 import React from 'react'
+import './Continue.css'
 
 export default ({ show, onContinue }) => {
     return (
