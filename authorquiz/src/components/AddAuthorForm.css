@@ -1,0 +1,10 @@
+.addAuthorForm {
+  width: 80%;
+  margin: 50px auto;
+}
+.inputGroup {
+  margin-bottom: 20px;
+}
+.inputGroup label {
+  display: block;
+}
