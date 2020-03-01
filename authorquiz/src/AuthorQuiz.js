@@ -6,6 +6,7 @@ import './AuthorQuiz.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Footer from './components/Footer'
 import { shuffle, sample } from 'underscore'
+import { Link } from 'react-router-dom'
 
 const authors = [
   {
@@ -59,16 +60,19 @@ const getTurnData = () => {
 
 
 export default () => {
+
   const [turnData, setTurnData] = useState(getTurnData())
   const selectBook = (bookTitle) => {
     const choiceIsRight = turnData.author.books.includes(bookTitle)
     setTurnData({ ...turnData, status: choiceIsRight ? 'right' : 'wrong' })
   }
+
   return (
     <div className="container-fluid">
       <Hero></Hero>
       <Turn {...turnData} selectBook={selectBook}></Turn>
       <Continue></Continue>
+      <p><Link to="/add">Add an author</Link></p>
       <Footer></Footer>
     </div>
   )
