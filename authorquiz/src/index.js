@@ -1,12 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { addAuthor } from './state/authorsState'
 import './index.css'
 import AuthorQuiz from './AuthorQuiz'
 import * as serviceWorker from './serviceWorker'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, withRouter } from 'react-router-dom'
 import AddAuthorForm from "./components/AddAuthorForm"
 
-const AddAuthorWrapper = _ => <AddAuthorForm onAddAuthor={console.log}></AddAuthorForm>
+
+const AddAuthorWrapper = withRouter(({ history }) => <AddAuthorForm onAddAuthor={author => receiveAuthor(author, history)}></AddAuthorForm>)
+
+const receiveAuthor = (author, history) => {
+    addAuthor(author)
+    history.push('/')
+}
 
 const App = _ => (
     <BrowserRouter>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { getAuthors } from './state/authorsState'
 import Continue from './components/Continue'
 import Turn from './components/Turn'
 import Hero from './components/Hero'
@@ -8,48 +9,8 @@ import Footer from './components/Footer'
 import { shuffle, sample } from 'underscore'
 import { Link } from 'react-router-dom'
 
-const authors = [
-  {
-    name: 'Mark Twain',
-    imageUrl: 'images/authors/marktwain.jpg',
-    imageSource: 'Wikimedia Commons',
-    books: ['The Adventures of Huckleberry Finn']
-  },
-  {
-    name: 'Joseph Conrad',
-    imageUrl: 'images/authors/josephconrad.png',
-    imageSource: 'Wikimedia Commons',
-    books: ['Heart of Darkness']
-  },
-  {
-    name: 'J.K. Rowling',
-    imageUrl: 'images/authors/jkrowling.jpg',
-    imageSource: 'Wikimedia Commons',
-    imageAttribution: 'Daniel Ogren',
-    books: ['Harry Potter and the Sorcerers Stone']
-  },
-  {
-    name: 'Stephen King',
-    imageUrl: 'images/authors/stephenking.jpg',
-    imageSource: 'Wikimedia Commons',
-    imageAttribution: 'Pinguino',
-    books: ['The Shining', 'IT']
-  },
-  {
-    name: 'Charles Dickens',
-    imageUrl: 'images/authors/charlesdickens.jpg',
-    imageSource: 'Wikimedia Commons',
-    books: ['David Copperfield', 'A Tale of Two Cities']
-  },
-  {
-    name: 'William Shakespeare',
-    imageUrl: 'images/authors/williamshakespeare.jpg',
-    imageSource: 'Wikimedia Commons',
-    books: ['Hamlet', 'Macbeth', 'Romeo and Juliet']
-  }
-]
-
-const getTurnData = () => {
+const newTurnData = () => {
+  const authors = getAuthors()
   const allBooks = authors.reduce((books, author) => books.concat(author.books), [])
   const fourRandomBooks = shuffle(allBooks).slice(0, 4)
   const answer = sample(fourRandomBooks)
@@ -61,17 +22,20 @@ const getTurnData = () => {
 
 export default () => {
 
-  const [turnData, setTurnData] = useState(getTurnData())
+  const [turnData, setTurnData] = useState(newTurnData())
   const selectBook = (bookTitle) => {
     const choiceIsRight = turnData.author.books.includes(bookTitle)
     setTurnData({ ...turnData, status: choiceIsRight ? 'right' : 'wrong' })
+  }
+  const onContinue = () => {
+    setTurnData(newTurnData())
   }
 
   return (
     <div className="container-fluid">
       <Hero></Hero>
       <Turn {...turnData} selectBook={selectBook}></Turn>
-      <Continue></Continue>
+      <Continue show={turnData.status === 'right'} onContinue={onContinue}></Continue>
       <p><Link to="/add">Add an author</Link></p>
       <Footer></Footer>
     </div>

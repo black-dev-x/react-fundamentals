@@ -3,7 +3,9 @@ import './AddAuthorForm.css'
 
 const defaultState = {
     name: '',
-    imageUrl: ''
+    imageUrl: '',
+    books: [],
+    bookTemp: ''
 }
 export default ({ onAddAuthor }) => {
     const [formState, setFormState] = useState(defaultState)
@@ -17,7 +19,14 @@ export default ({ onAddAuthor }) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        onAddAuthor(event)
+        onAddAuthor(formState)
+    }
+
+    const addNewBook = _ => {
+        const newFormState = { ...formState }
+        newFormState.books = formState.books.concat(formState.bookTemp)
+        newFormState.bookTemp = ''
+        setFormState(newFormState)
     }
 
     return (
@@ -31,6 +40,12 @@ export default ({ onAddAuthor }) => {
                 <div className="inputGroup">
                     <label htmlFor="imageUrl">Image URL</label>
                     <input type="text" name="imageUrl" value={formState.imageUrl} onChange={updateState}></input>
+                </div>
+                <div className="inputGroup">
+                    {formState.books.map(book => <p key={book}>{book}</p>)}
+                    <label htmlFor="bookTemp">Books</label>
+                    <input type="text" name="bookTemp" value={formState.bookTemp} onChange={updateState}></input>
+                    <button type="button" onClick={addNewBook}>+</button>
                 </div>
                 <button type="submit">Add new author!</button>
             </form>

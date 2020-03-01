@@ -1,7 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-export default props => {
+export default ({ show, onContinue }) => {
     return (
-        <h1>Continue</h1>
+        <div className="row continue">
+            {show ?
+                <div className="col-11">
+                    <button className="btn btn-primary btn-lg float-right" onClick={onContinue}>Continue?</button>
+                </div>
+                : null}
+        </div>
     )
 }
