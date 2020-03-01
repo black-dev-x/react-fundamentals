@@ -5,7 +5,7 @@ const defaultState = {
     name: '',
     imageUrl: ''
 }
-export default ({ match }) => {
+export default ({ onAddAuthor }) => {
     const [formState, setFormState] = useState(defaultState)
 
     const updateState = event => {
@@ -17,7 +17,9 @@ export default ({ match }) => {
 
     const handleSubmit = event => {
         event.preventDefault()
+        onAddAuthor(event)
     }
+
     return (
         <div className="addAuthorForm">
             <h1>Add Author</h1>
